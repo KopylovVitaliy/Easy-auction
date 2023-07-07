@@ -22,5 +22,4 @@ public class AuctionController {
     public List<LotDTO> addNewLot(@RequestBody List<LotDTO>  lotDTOS){
         return lotService.addNewLot(lotDTOS);
     }
-
 }
