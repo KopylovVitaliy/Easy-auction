@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changesets/07072023_create_lot.yml
