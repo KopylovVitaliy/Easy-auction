@@ -4,8 +4,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
-
-import ru.skypro.cweasyauction.service.BidderMapper;
 import ru.skypro.cweasyauction.service.BidderService;
 import ru.skypro.cweasyauction.service.LotService;
 
@@ -27,8 +25,8 @@ public class AuctionController {
 
     }
     @GetMapping("/{id}/first")
-    public BidderDTO firstBidderInfo(@PathVariable int id){
-        return null;
+    public String firstBidderInfo(@PathVariable int id){
+        return bidderService.find(id);
     }
     @GetMapping("/{id}/frequent")
     public BidderDTO maxBidForLot(){

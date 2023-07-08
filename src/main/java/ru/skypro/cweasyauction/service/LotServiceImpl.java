@@ -59,4 +59,5 @@ public class LotServiceImpl implements LotService {
         return lotRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
+    
 }

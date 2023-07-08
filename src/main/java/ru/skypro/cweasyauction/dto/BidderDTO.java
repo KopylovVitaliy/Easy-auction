@@ -10,13 +10,10 @@ import java.time.LocalDateTime;
 @Setter
 public class BidderDTO {
     private String bidderName;
-
-
-    public BidderDTO(String bidderName, Lot lot) {
+    public BidderDTO(String bidderName) {
         this.bidderName = bidderName;
 
     }
-
     public BidderDTO() {
     }
 }
