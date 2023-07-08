@@ -2,6 +2,8 @@ package ru.skypro.cweasyauction.service;
 
 import org.springframework.stereotype.Service;
 import ru.skypro.cweasyauction.dto.LotDTO;
+import ru.skypro.cweasyauction.pojo.Lot;
+import ru.skypro.cweasyauction.pojo.LotStatus;
 import ru.skypro.cweasyauction.repository.LotRepository;
 
 import java.util.List;
@@ -35,5 +37,26 @@ public class LotServiceImpl implements LotService {
                 .stream()
                 .map(lotMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void startBiddingForLotId(int id) {
+        Lot lot = lotRepository.findById(id)
+                .orElseThrow();
+        lot.setStatus(LotStatus.STARTED.getStatus());
+        lotRepository.save(lot);
+    }
+
+    @Override
+    public void stopBiddingForLotId(int id) {
+        Lot lot = lotRepository.findById(id)
+                .orElseThrow();
+        lot.setStatus(LotStatus.STOPPED.getStatus());
+        lotRepository.save(lot);
+    }
+    @Override
+    public Lot getLotById(int id) {
+        return lotRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
     }
 }

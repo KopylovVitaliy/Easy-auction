@@ -20,7 +20,7 @@ public class Bid {
 
     @ManyToOne
     private Lot lot;
-    public Bid(String bidderName, String bidDate) {
+    public Bid(String bidderName) {
         this.bidderName = bidderName;
         this.bidDate = bidDate;
     }
