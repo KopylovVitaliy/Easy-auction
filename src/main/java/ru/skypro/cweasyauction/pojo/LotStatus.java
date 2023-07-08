@@ -3,14 +3,14 @@ package ru.skypro.cweasyauction.pojo;
 import lombok.Getter;
 
 @Getter
-public enum Status {
+public enum LotStatus {
     STARTED("STARTED"),
     STOPPED("STOPPED"),
     CREATED("CREATED");
 
     private String status;
 
-    Status(String status) {
+    LotStatus(String status) {
         this.status = status;
     }
 

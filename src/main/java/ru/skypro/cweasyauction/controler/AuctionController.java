@@ -1,10 +1,9 @@
 package ru.skypro.cweasyauction.controler;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
+import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.service.LotService;
 
 import java.util.List;
@@ -16,6 +15,32 @@ public class AuctionController {
 
     public AuctionController(LotService lotService) {
         this.lotService = lotService;
+    }
+    @GetMapping("/{id}/first")
+    public BidderDTO firstBidderInfo(){
+        return null;
+    }
+    @GetMapping("/{id}/frequent")
+    public BidderDTO maxBidForLot(){
+        return null;
+    }
+    @GetMapping("/{id}")
+    public LotFullInfoDTO getFullInfo(){
+        return null;
+    }
+
+
+    @PostMapping("/{id}/start")
+    public void startBiddingForLotId(){
+
+    }
+    @PostMapping("/{id}/bid")
+    public BidderDTO sendBidForLot(){
+        return null;
+    }
+    @PostMapping("/{id}/stop")
+    public LotDTO stopBiddingForLotId(){
+        return null;
     }
 
     @PostMapping

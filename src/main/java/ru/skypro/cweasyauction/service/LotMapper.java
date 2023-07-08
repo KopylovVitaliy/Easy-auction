@@ -3,9 +3,8 @@ package ru.skypro.cweasyauction.service;
 import org.springframework.stereotype.Component;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
-import ru.skypro.cweasyauction.pojo.Status;
 
-import static ru.skypro.cweasyauction.pojo.Status.CREATED;
+import static ru.skypro.cweasyauction.pojo.LotStatus.CREATED;
 
 @Component
 public class LotMapper {

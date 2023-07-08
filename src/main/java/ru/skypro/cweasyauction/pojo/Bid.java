@@ -1,6 +1,6 @@
 package ru.skypro.cweasyauction.pojo;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +10,22 @@ import java.util.Locale;
 
 @Getter
 @Setter
+@Entity
 public class Bid {
-    LocalDateTime localDateTime = LocalDateTime.now();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String bidderName;
     private String bidDate;
 
-    public Bid(String bidderName) {
+    @ManyToOne
+    private Lot lot;
+    public Bid(String bidderName, String bidDate) {
         this.bidderName = bidderName;
-        this.bidDate = String.valueOf(localDateTime);
+        this.bidDate = bidDate;
+    }
+
+    public Bid() {
+
     }
 }
