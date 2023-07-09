@@ -22,3 +22,8 @@ databaseChangeLog:
                   type: varchar(64)
                   constraints:
                     nullable: false
+              - column:
+                  name: lot_id
+                  type: int
+                  constraints:
+                   nullable: false
