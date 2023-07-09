@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface BidderService {
     List<BidderDTO> addNewBid(List<BidderDTO> bidderDTOS, int id);
-    String find(int id);
+    BidderDTO findFirstBidder(int id);
+    BidderDTO lastBid(int id);
+    BidderDTO findMaxBid(int id);
 }

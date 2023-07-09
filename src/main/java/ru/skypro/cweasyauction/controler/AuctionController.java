@@ -25,16 +25,16 @@ public class AuctionController {
 
     }
     @GetMapping("/{id}/first")
-    public String firstBidderInfo(@PathVariable int id){
-        return bidderService.find(id);
+    public BidderDTO firstBidderInfo(@PathVariable int id){
+        return bidderService.findFirstBidder(id);
     }
     @GetMapping("/{id}/frequent")
-    public BidderDTO maxBidForLot(){
-        return null;
+    public BidderDTO maxBidForLot(@PathVariable int id){
+        return bidderService.findMaxBid(id);
     }
     @GetMapping("/{id}")
-    public LotFullInfoDTO getFullInfo(){
-        return null;
+    public LotFullInfoDTO getFullInfo(@PathVariable int id){
+        return lotService.getFullInfo(id);
     }
 
 

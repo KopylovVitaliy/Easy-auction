@@ -5,11 +5,12 @@ import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
 import ru.skypro.cweasyauction.pojo.LotStatus;
 import ru.skypro.cweasyauction.repository.BidderRopository;
-import ru.skypro.cweasyauction.repository.LotRepository;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,12 +54,18 @@ public class BidderServiceImpl implements BidderService {
     }
 
     @Override
-    public String find(int id) {
-        return bidderRopository.findFirstBidder(id).stream()
-                .findFirst()
-                .orElseThrow()
-                .getBidderName();
+    public BidderDTO findFirstBidder(int id) {
+        return bidderRopository.findFirstBidder(id).orElseThrow();
+    }
 
+    @Override
+    public BidderDTO lastBid(int id) {
+        return bidderRopository.findLastBidder(id).orElseThrow();
+    }
+
+    @Override
+    public BidderDTO findMaxBid(int id) {
+        return bidderRopository.findMaxBid(id).orElseThrow();
     }
 
 }

@@ -14,7 +14,7 @@ public class LotFullInfoDTO {
     private Integer startPrice;
     private Integer bidPrice;
     private Integer currentPrice;
-    private Bid lastBid;
+    private BidderDTO lastBid;
 
     public LotFullInfoDTO(Integer id,
                           String status,
@@ -23,7 +23,7 @@ public class LotFullInfoDTO {
                           Integer startPrice,
                           Integer bidPrice,
                           Integer currentPrice,
-                          Bid lastBid) {
+                          BidderDTO lastBid) {
         this.id = id;
         this.status = status;
         this.title = title;

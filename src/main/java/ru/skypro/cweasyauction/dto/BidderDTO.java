@@ -10,8 +10,11 @@ import java.time.LocalDateTime;
 @Setter
 public class BidderDTO {
     private String bidderName;
-    public BidderDTO(String bidderName) {
+    private String bidDate;
+
+    public BidderDTO(String bidderName, String bidDate) {
         this.bidderName = bidderName;
+        this.bidDate = bidDate;
 
     }
     public BidderDTO() {

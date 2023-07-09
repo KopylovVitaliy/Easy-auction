@@ -1,9 +1,12 @@
 package ru.skypro.cweasyauction.service;
 
 import org.springframework.stereotype.Service;
+import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
+import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
 import ru.skypro.cweasyauction.pojo.LotStatus;
+import ru.skypro.cweasyauction.repository.BidderRopository;
 import ru.skypro.cweasyauction.repository.LotRepository;
 
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 public class LotServiceImpl implements LotService {
     private final LotRepository lotRepository;
     private final LotMapper lotMapper;
+
 
     public LotServiceImpl(LotRepository lotRepository, LotMapper lotMapper) {
         this.lotRepository = lotRepository;
@@ -59,5 +63,13 @@ public class LotServiceImpl implements LotService {
         return lotRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
-    
+
+    @Override
+    public LotFullInfoDTO getFullInfo(int id) {
+        return lotRepository.findById(id).stream()
+                .map(lotMapper::toFullInfo)
+                .findFirst()
+                .orElseThrow();
+    }
+
 }

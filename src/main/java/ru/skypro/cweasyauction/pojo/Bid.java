@@ -17,12 +17,10 @@ public class Bid {
     private Integer id;
     private String bidderName;
     private String bidDate;
-
     @ManyToOne
     private Lot lot;
     public Bid(String bidderName) {
         this.bidderName = bidderName;
-        this.bidDate = bidDate;
     }
 
     public Bid() {
