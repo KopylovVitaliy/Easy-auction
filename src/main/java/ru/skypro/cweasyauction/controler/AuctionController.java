@@ -7,7 +7,6 @@ import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.service.BidderService;
 import ru.skypro.cweasyauction.service.LotService;
 
-
 import java.util.List;
 
 
@@ -18,41 +17,49 @@ public class AuctionController {
     private final BidderService bidderService;
 
 
-
     public AuctionController(LotService lotService, BidderService bidderService) {
         this.lotService = lotService;
         this.bidderService = bidderService;
 
     }
+
     @GetMapping("/{id}/first")
-    public BidderDTO firstBidderInfo(@PathVariable int id){
+    public BidderDTO firstBidderInfo(@PathVariable int id) {
         return bidderService.findFirstBidder(id);
     }
+
     @GetMapping("/{id}/frequent")
-    public BidderDTO maxBidForLot(@PathVariable int id){
+    public BidderDTO maxBidForLot(@PathVariable int id) {
         return bidderService.findMaxBid(id);
     }
+
     @GetMapping("/{id}")
-    public LotFullInfoDTO getFullInfo(@PathVariable int id){
+    public LotFullInfoDTO getFullInfo(@PathVariable int id) {
         return lotService.getFullInfo(id);
     }
 
 
     @PostMapping("/{id}/start")
-    public void startBiddingForLotId(@PathVariable int id){
+    public void startBiddingForLotId(@PathVariable int id) {
         lotService.startBiddingForLotId(id);
     }
+
     @PostMapping("/{id}/bid")
-    public List<BidderDTO> sendBidForLot(@RequestBody List<BidderDTO> bidderDTOS, @PathVariable int id){
-       return bidderService.addNewBid(bidderDTOS, id);
+    public List<BidderDTO> sendBidForLot(@RequestBody List<BidderDTO> bidderDTOS, @PathVariable int id) {
+        return bidderService.addNewBid(bidderDTOS, id);
     }
+
     @PostMapping("/{id}/stop")
-    public void stopBiddingForLotId(@PathVariable int id){
+    public void stopBiddingForLotId(@PathVariable int id) {
         lotService.stopBiddingForLotId(id);
     }
 
     @PostMapping
-    public List<LotDTO> addNewLot(@RequestBody List<LotDTO>  lotDTOS){
+    public List<LotDTO> addNewLot(@RequestBody List<LotDTO> lotDTOS) {
         return lotService.addNewLot(lotDTOS);
+    }
+
+    @GetMapping("/export")
+    public void sss() {
     }
 }

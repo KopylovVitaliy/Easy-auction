@@ -1,5 +1,7 @@
 package ru.skypro.cweasyauction.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
@@ -19,6 +21,7 @@ public class BidderServiceImpl implements BidderService {
     private final BidderMapper bidderMapper;
     private final LotService lotService;
     LocalDateTime localDateTime = LocalDateTime.now();
+    Logger logger = LoggerFactory.getLogger(BidderServiceImpl.class);
 
     public BidderServiceImpl(BidderRopository bidderRopository, BidderMapper bidderMapper, LotService lotService) {
         this.bidderRopository = bidderRopository;
@@ -28,6 +31,7 @@ public class BidderServiceImpl implements BidderService {
 
     @Override
     public List<BidderDTO> addNewBid(List<BidderDTO> bidderDTOS, int id) {
+        logger.debug("Создание ставки на лот id=" + id);
         Lot lot = lotService.getLotById(id);
         if (lot.getStatus().equals(LotStatus.CREATED.getStatus()) || lot.getStatus().equals(LotStatus.STOPPED.getStatus())) {
             throw new RuntimeException();
@@ -55,17 +59,26 @@ public class BidderServiceImpl implements BidderService {
 
     @Override
     public BidderDTO findFirstBidder(int id) {
-        return bidderRopository.findFirstBidder(id).orElseThrow();
+        return bidderRopository.findFirstBidder(id).orElseThrow(()->{
+            logger.error("ставка не найдена. id =" + id);
+            return new RuntimeException();
+        });
     }
 
     @Override
     public BidderDTO lastBid(int id) {
-        return bidderRopository.findLastBidder(id).orElseThrow();
+        return bidderRopository.findLastBidder(id).orElseThrow(()->{
+            logger.error("ставка не найдена. id =" + id);
+            return new RuntimeException();
+        });
     }
 
     @Override
     public BidderDTO findMaxBid(int id) {
-        return bidderRopository.findMaxBid(id).orElseThrow();
+        return bidderRopository.findMaxBid(id).orElseThrow(() -> {
+            logger.error("ставка не найдена. id =" + id);
+            return new RuntimeException();
+        });
     }
 
 }
