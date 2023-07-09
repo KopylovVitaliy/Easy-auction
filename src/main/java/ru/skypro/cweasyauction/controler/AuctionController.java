@@ -1,12 +1,15 @@
 package ru.skypro.cweasyauction.controler;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.service.BidderService;
 import ru.skypro.cweasyauction.service.LotService;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -59,7 +62,8 @@ public class AuctionController {
         return lotService.addNewLot(lotDTOS);
     }
 
-    @GetMapping("/export")
-    public void sss() {
+    @GetMapping ("/export")
+    public void csvFile() throws IOException {
+        lotService.csvFile();
     }
 }
