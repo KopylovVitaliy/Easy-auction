@@ -9,10 +9,10 @@ import ru.skypro.cweasyauction.pojo.LotStatus;
 import ru.skypro.cweasyauction.repository.BidderRopository;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
+
 import java.util.stream.Collectors;
 
 @Service

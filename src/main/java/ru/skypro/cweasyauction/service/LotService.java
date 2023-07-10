@@ -14,4 +14,5 @@ public interface LotService {
     Lot getLotById(int id);
     LotFullInfoDTO getFullInfo(int id);
     void csvFile() throws IOException;
+    String readTextFromFile(String fileName);
 }

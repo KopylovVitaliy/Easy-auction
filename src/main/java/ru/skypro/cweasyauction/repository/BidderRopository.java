@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.pojo.Bid;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Repository

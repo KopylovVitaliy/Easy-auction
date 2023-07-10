@@ -2,9 +2,12 @@ package ru.skypro.cweasyauction.service;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import ru.skypro.cweasyauction.dto.LotCSVDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
@@ -12,10 +15,11 @@ import ru.skypro.cweasyauction.pojo.LotStatus;
 import ru.skypro.cweasyauction.repository.LotRepository;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -97,59 +101,35 @@ public class LotServiceImpl implements LotService {
 
 
     @Override
-    public void csvFile() throws IOException {
+    public void csvFile() {
+        List<LotCSVDTO> lotCsv = lotRepository.findAll().stream()
+                .map(lotMapper::lotCSVDTO)
+                .toList();
+        try {
+            Writer writer = Files.newBufferedWriter(Paths.get("LotInfo.csv"));
+            CSVPrinter printer = CSVFormat.DEFAULT
+                    .withHeader("Id ", "title ","Status ", "lastBidderName ", "currentPrice ")
+                    .print(writer);
 
-//        FileWriter out = new FileWriter("new_CSV.csv");
-//        String[] HEADERS = {"id", "title"};
-//        CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
-//                .setHeader(HEADERS)
-//                .build();
-//        Map<Integer, LotFullInfoDTO> map = new HashMap<>();
-//        map.put(1, getFullInfo(1));
-//        try (final CSVPrinter printer = new CSVPrinter(out, csvFormat)) {
-//            map.forEach((id, title) -> {
-//                try {
-//                    printer.printRecord(id, title);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//        }
-
-       LotFullInfoDTO lotFullInfoDTO = getFullInfo(1);
-        try (PrintWriter writer = new PrintWriter(new File("test1.csv"))) {
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("id");
-            sb.append(',');
-            sb.append("title");
-            sb.append(',');
-            sb.append("status");
-            sb.append(',');
-            sb.append("lastBidder");
-            sb.append(',');
-            sb.append("currentPrice");
-            sb.append('\n');
-
-            sb.append(lotFullInfoDTO.getId());
-            sb.append(',');
-            sb.append(lotFullInfoDTO.getTitle());
-            sb.append(',');
-            sb.append(lotFullInfoDTO.getStatus());
-            sb.append(',');
-            sb.append(lotFullInfoDTO.getLastBid().toString());
-            sb.append(',');
-            sb.append(lotFullInfoDTO.getCurrentPrice().toString());
-            sb.append('\n');
-
-            writer.write(sb.toString());
+            printer.printRecords(lotCsv);
+            printer.flush();
             writer.close();
-            System.out.println("done!");
 
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
+    }
+    @Override
+    public String readTextFromFile(String fileName) {
+        try {
+
+            return Files.lines(Paths.get(fileName), StandardCharsets.UTF_8)
+                    .collect(Collectors.joining());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            return "ошибка";
+        }
     }
 }
 

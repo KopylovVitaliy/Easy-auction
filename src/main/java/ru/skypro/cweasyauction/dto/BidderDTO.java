@@ -20,9 +20,6 @@ public class BidderDTO {
 
     @Override
     public String toString() {
-        return "BidderDTO{" +
-                "bidderName='" + bidderName + '\'' +
-                ", bidDate='" + bidDate + '\'' +
-                '}';
+        return bidderName;
     }
 }

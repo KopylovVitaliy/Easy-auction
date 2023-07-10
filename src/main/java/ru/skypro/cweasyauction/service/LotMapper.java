@@ -1,6 +1,7 @@
 package ru.skypro.cweasyauction.service;
 
 import org.springframework.stereotype.Component;
+import ru.skypro.cweasyauction.dto.LotCSVDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.pojo.Lot;
@@ -45,5 +46,14 @@ public class LotMapper {
         lotFullInfoDTO.setCurrentPrice(lot.getBidList().size() * lot.getBidPrice() + lot.getStartPrice());
         lotFullInfoDTO.setLastBid(bidderRopository.findLastBidder(lot.getId()).orElse(null));
         return lotFullInfoDTO;
+    }
+    public LotCSVDTO lotCSVDTO(Lot lot){
+        LotCSVDTO lotCSVDTO = new LotCSVDTO();
+        lotCSVDTO.setId(lot.getId());
+        lotCSVDTO.setTitle(lot.getTitle());
+        lotCSVDTO.setStatus(lot.getStatus());
+        lotCSVDTO.setCurrentPrice(lot.getBidList().size() * lot.getBidPrice() + lot.getStartPrice());
+        lotCSVDTO.setLastBid(bidderRopository.findLastBidder(lot.getId()).orElse(null));
+        return lotCSVDTO;
     }
 }

@@ -1,15 +1,21 @@
 package ru.skypro.cweasyauction.controler;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 import ru.skypro.cweasyauction.dto.BidderDTO;
 import ru.skypro.cweasyauction.dto.LotDTO;
 import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.service.BidderService;
 import ru.skypro.cweasyauction.service.LotService;
 
+import java.io.File;
 import java.io.IOException;
+
 import java.util.List;
 
 
@@ -62,8 +68,19 @@ public class AuctionController {
         return lotService.addNewLot(lotDTOS);
     }
 
-    @GetMapping ("/export")
-    public void csvFile() throws IOException {
+    @GetMapping("/export")
+    public ResponseEntity<Resource> csvFile() throws IOException {
         lotService.csvFile();
+
+        File file = new File("LotInfo.csv");
+        String fileName = lotService.readTextFromFile(file.getName());
+
+        Resource resource = new ByteArrayResource(fileName.getBytes());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "LotInfo.csv" + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(resource);
     }
 }
+
+
