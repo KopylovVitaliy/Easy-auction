@@ -1,5 +1,6 @@
 package ru.skypro.cweasyauction.controler;
 
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -76,14 +77,12 @@ public class AuctionController {
         lotService.csvFile();
 
         File file = new File("LotInfo.csv");
-        String fileName = lotService.readTextFromFile(file.getName());
-        Resource resource = new PathResource(fileName);
+        Resource resource = new PathResource("LotInfo.csv");
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "LotInfo.csv" + "\"")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(resource);
     }
-
 }
 
 
