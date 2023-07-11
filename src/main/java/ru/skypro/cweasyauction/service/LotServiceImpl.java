@@ -128,8 +128,8 @@ public class LotServiceImpl implements LotService {
                     .collect(Collectors.joining());
         } catch (IOException ioException) {
             ioException.printStackTrace();
-            return "ошибка";
         }
+        return null;
     }
 }
 

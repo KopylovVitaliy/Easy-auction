@@ -27,3 +27,9 @@ databaseChangeLog:
                   type: int
                   constraints:
                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: bid
+            baseColumnNames: lot_id
+            referencedTableName: lot
+            referencedColumnNames: id
+            constraintName: lot_id
