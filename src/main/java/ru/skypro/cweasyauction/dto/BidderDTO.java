@@ -7,12 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BidderDTO {
-    private Integer id;
+
     private String bidderName;
     private String bidDate;
 
-    public BidderDTO(Integer id,String bidderName, String bidDate) {
-        this.id = id;
+    public BidderDTO(String bidderName, String bidDate) {
+
         this.bidderName = bidderName;
         this.bidDate = bidDate;
 
