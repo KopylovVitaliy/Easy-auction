@@ -14,8 +14,6 @@ import ru.skypro.cweasyauction.dto.LotFullInfoDTO;
 import ru.skypro.cweasyauction.service.BidderService;
 import ru.skypro.cweasyauction.service.LotService;
 
-import java.io.File;
-
 import java.io.IOException;
 
 
@@ -75,8 +73,6 @@ public class AuctionController {
     @GetMapping("/export")
     public ResponseEntity<Resource> csvFile() throws IOException {
         lotService.csvFile();
-
-        File file = new File("LotInfo.csv");
         Resource resource = new PathResource("LotInfo.csv");
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "LotInfo.csv" + "\"")
