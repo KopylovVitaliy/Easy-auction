@@ -20,7 +20,7 @@ public class BidderServiceImpl implements BidderService {
     private final BidderRopository bidderRopository;
     private final BidderMapper bidderMapper;
     private final LotService lotService;
-    LocalDateTime localDateTime = LocalDateTime.now();
+
     Logger logger = LoggerFactory.getLogger(BidderServiceImpl.class);
 
     public BidderServiceImpl(BidderRopository bidderRopository, BidderMapper bidderMapper, LotService lotService) {
@@ -32,6 +32,7 @@ public class BidderServiceImpl implements BidderService {
     @Override
     public List<BidderDTO> addNewBid(List<BidderDTO> bidderDTOS, int id) {
         logger.debug("Создание ставки на лот id=" + id);
+        LocalDateTime localDateTime = LocalDateTime.now();
         Lot lot = lotService.getLotById(id);
         if (lot.getStatus().equals(LotStatus.CREATED.getStatus()) || lot.getStatus().equals(LotStatus.STOPPED.getStatus())) {
             throw new RuntimeException();
