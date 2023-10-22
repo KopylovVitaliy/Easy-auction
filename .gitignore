@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/myApp.log
+/mvnw
+/mvnw.cmd
+/src/test/java/ru/skypro/cweasyauction/CwEasyAuctionApplicationTests.java
